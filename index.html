@@ -43,16 +43,17 @@
     z-index: 100;
   }
 
+  /* LOGO AUMENTADA */
   .logo-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 2rem;
-    padding: 0 1.5rem; 
+    margin-bottom: 2.5rem;
+    padding: 0 0.5rem; /* Diminuído o padding para dar mais espaço à logo */
   }
 
   .logo-box {
     width: 100%;
-    max-width: 230px; 
+    max-width: 260px; /* Aumentado de 230px para 260px */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -155,18 +156,17 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   }
 
-  /* --- FONTES AUMENTADAS AQUI --- */
   .quote-title {
     font-family: 'Playfair Display', serif;
     font-style: italic;
     color: var(--heading-color);
-    font-size: 2rem; /* Aumentado de 1.5rem para 2rem */
+    font-size: 2rem; 
     margin-bottom: 1.5rem;
   }
 
   .quote-text {
-    max-width: 800px; /* Aumentado um pouco para acomodar bem o texto maior */
-    font-size: 1.4rem; /* Aumentado de 1.15rem para 1.4rem */
+    max-width: 800px; 
+    font-size: 1.4rem; 
     line-height: 1.8;
     color: var(--text-muted);
     margin-bottom: 2rem;
@@ -174,11 +174,10 @@
 
   .signature {
     font-weight: 600;
-    font-size: 1.25rem; /* Aumentado de 1.1rem para 1.25rem */
+    font-size: 1.25rem; 
     color: var(--text-dark);
     margin-bottom: 2rem;
   }
-  /* ------------------------------ */
 
   .about-social {
     display: flex;
@@ -298,18 +297,37 @@
 
   /* SECTION 5: GUIAS */
   .guides-section {
-    padding: 0;
+    padding: 4rem 2rem; 
     background: linear-gradient(to bottom, #FFFFFF 0%, #000000 100%);
     display: flex;
+    flex-direction: column; 
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+  }
+
+  /* TÍTULO ADICIONADO AQUI */
+  .guides-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 2.5rem;
+    color: var(--heading-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .guides-text {
+    max-width: 900px;
+    font-size: 1.25rem;
+    line-height: 1.8;
+    text-align: center;
+    color: var(--text-dark); 
+    margin-bottom: 3rem;
   }
 
   .guides-section img {
     width: 100%;
-    height: 100%;
+    max-height: 70vh; 
     object-fit: contain;
   }
 
@@ -323,7 +341,7 @@
       padding: 1rem;
     }
     .logo-container { margin-bottom: 1rem; }
-    .logo-box { max-width: 180px; } 
+    .logo-box { max-width: 200px; } /* Ajustado para celular */
     .nav-links li { text-align: center; }
     .nav-links a { padding: 0.8rem; }
     .social-icons { padding: 1rem 0; margin-top: 1rem; }
@@ -334,9 +352,12 @@
     .img-large { grid-row: span 1; }
     .img-landscape { grid-column: span 1; height: 300px; }
     
-    /* Ajuste responsivo extra para os textos aumentados não ficarem gigantes no celular */
     .quote-title { font-size: 1.6rem; }
     .quote-text { font-size: 1.15rem; }
+
+    .guides-title { font-size: 2rem; }
+    .guides-text { font-size: 1.1rem; margin-bottom: 2rem; }
+    .guides-section { padding: 3rem 1.5rem; }
   }
 </style>
 </head>
@@ -346,7 +367,7 @@
   <aside class="sidebar">
     <div class="logo-container">
       <div class="logo-box">
-        <img src="logo.jpeg" alt="faunainflora">
+        <img src="logo_transparente.png" alt="faunainflora">
       </div>
     </div>
     
@@ -425,6 +446,10 @@
 
     <!-- SEÇÃO 5: GUIAS -->
     <section id="guias" class="guides-section">
+      <h2 class="guides-title">Guias e Manuais</h2>
+      <p class="guides-text">
+        Conheça a coletânea de guias corporativos da fauna e flora da Faunainflora: materiais técnicos e visuais desenvolvidos para identificação de espécies, estudos ambientais, relatórios e processos de licenciamento.
+      </p>
       <img src="guias.jpeg" alt="Guias">
     </section>
 
