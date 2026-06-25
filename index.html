@@ -43,17 +43,17 @@
     z-index: 100;
   }
 
-  /* LOGO AUMENTADA */
+  /* LOGO */
   .logo-container {
     display: flex;
     justify-content: center;
     margin-bottom: 2.5rem;
-    padding: 0 0.5rem; /* Diminuído o padding para dar mais espaço à logo */
+    padding: 0 0.5rem;
   }
 
   .logo-box {
     width: 100%;
-    max-width: 260px; /* Aumentado de 230px para 260px */
+    max-width: 260px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -127,7 +127,7 @@
     flex-direction: column;
   }
 
-  /* SECTION 1: HERO (Imagem Full) */
+  /* SECTION 1: HERO */
   .hero-section {
     height: 100vh;
     width: 100%;
@@ -186,7 +186,7 @@
   .about-social .social-icon { background-color: #B0C4B1; }
   .about-social .social-icon:hover { background-color: var(--heading-color); }
 
-  /* SECTION 3: BANNER + 3 COLUNAS */
+  /* SECTION 3: DIRETRIZES */
   .banner-section {
     width: 100%;
   }
@@ -255,10 +255,312 @@
     text-align: justify;
   }
 
-  /* SECTION 4: GALERIA DE IMAGENS */
+  /* SECTION 4: METODOLOGIA */
+  .metodologia-section {
+    padding: 6rem 4rem;
+    background: var(--bg-cream);
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  .metodologia-content {
+    flex: 1;
+  }
+
+  .metodologia-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 2.5rem;
+    color: var(--heading-color);
+    margin-bottom: 1.5rem;
+  }
+
+  .metodologia-text p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    text-align: justify;
+  }
+
+  .metodologia-visual {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .metodologia-card {
+    background: var(--white);
+    padding: 2rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    border-left: 4px solid var(--heading-color);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .metodologia-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  }
+
+  .metodologia-card .icon {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .metodologia-card h4 {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  /* SECTION 5: SERVIÇOS */
+  .servicos-section {
+    padding: 6rem 4rem;
+    background: var(--logo-bg);
+    color: var(--white);
+    text-align: center;
+  }
+
+  .servicos-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 2.5rem;
+    color: var(--sidebar-bg);
+    margin-bottom: 1.5rem;
+  }
+
+  .servicos-desc {
+    max-width: 950px;
+    margin: 0 auto 4rem auto;
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .servicos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .servico-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 2.5rem 1.5rem;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .servico-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--heading-color);
+    transform: translateY(-6px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  }
+
+  .servico-icon {
+    font-size: 2.2rem;
+    margin-bottom: 1.2rem;
+    color: var(--sidebar-bg);
+  }
+
+  .servico-card h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  /* SECTION 6: POR QUE ESCOLHER */
+  .pq-escolher-section {
+    padding: 6rem 4rem;
+    background: var(--bg-cream);
+    display: flex;
+    justify-content: center;
+  }
+
+  .pq-escolher-container {
+    max-width: 1000px;
+    text-align: center;
+    background: var(--white);
+    padding: 4rem 5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+    border-top: 6px solid var(--heading-color);
+  }
+
+  .pq-escolher-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 2.5rem;
+    color: var(--logo-bg);
+    margin-bottom: 2rem;
+  }
+
+  .pq-escolher-content p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    text-align: justify;
+  }
+
+  .pq-escolher-content p:last-child {
+    margin-bottom: 0;
+    font-weight: 500;
+    color: var(--text-dark);
+    text-align: center;
+    font-size: 1.4rem;
+    font-style: italic;
+    margin-top: 2.5rem;
+  }
+
+  /* SECTION 7: DIFERENCIAIS */
+  .diferenciais-section {
+    padding: 6rem 4rem;
+    background: var(--white); 
+    text-align: center;
+  }
+
+  .diferenciais-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 2.5rem;
+    color: var(--heading-color);
+    margin-bottom: 1.5rem;
+  }
+
+  .diferenciais-text {
+    max-width: 900px;
+    margin: 0 auto 4rem auto;
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+  }
+
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .diff-card {
+    background: var(--bg-cream);
+    padding: 2.5rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    border-top: 4px solid var(--heading-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .diff-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  }
+
+  .diff-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .diff-card h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.15rem;
+    color: var(--text-dark);
+    font-weight: 600;
+  }
+
+  /* SECTION 8: EQUIPE (Nova Seção) */
+  .equipe-section {
+    padding: 6rem 4rem;
+    background: var(--bg-cream);
+    text-align: center;
+  }
+
+  .equipe-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 2.5rem;
+    color: var(--heading-color);
+    margin-bottom: 1rem;
+  }
+
+  .equipe-desc {
+    max-width: 700px;
+    margin: 0 auto 4rem auto;
+    font-size: 1.15rem;
+    color: var(--text-muted);
+  }
+
+  .equipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .membro-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .membro-foto {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #E2E8DF; /* Cor caso a foto não carregue */
+    border: 4px solid var(--white);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .membro-foto:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+  }
+
+  .membro-nome {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.3rem;
+  }
+
+  .membro-cargo {
+    font-size: 0.95rem;
+    color: var(--heading-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+
+  /* SECTION 9: GALERIA DE IMAGENS */
   .gallery-section {
     padding: 4rem;
-    background: var(--bg-cream);
+    background: var(--white); /* Alterado para intercalar com o creme da equipe */
   }
 
   .gallery-grid {
@@ -295,7 +597,7 @@
     height: 400px;
   }
 
-  /* SECTION 5: GUIAS */
+  /* SECTION 10: GUIAS */
   .guides-section {
     padding: 4rem 2rem; 
     background: linear-gradient(to bottom, #FFFFFF 0%, #000000 100%);
@@ -306,7 +608,6 @@
     min-height: 100vh;
   }
 
-  /* TÍTULO ADICIONADO AQUI */
   .guides-title {
     font-family: 'Playfair Display', serif;
     font-style: italic;
@@ -341,12 +642,33 @@
       padding: 1rem;
     }
     .logo-container { margin-bottom: 1rem; }
-    .logo-box { max-width: 200px; } /* Ajustado para celular */
+    .logo-box { max-width: 200px; } 
     .nav-links li { text-align: center; }
     .nav-links a { padding: 0.8rem; }
     .social-icons { padding: 1rem 0; margin-top: 1rem; }
     .main-content { margin-left: 0; width: 100%; }
     .three-columns { grid-template-columns: 1fr; padding: 3rem 2rem; gap: 2rem; }
+    
+    .metodologia-section { flex-direction: column; padding: 4rem 2rem; gap: 2rem; }
+    .metodologia-title { font-size: 2rem; text-align: center; }
+    .metodologia-visual { width: 100%; }
+
+    .servicos-section { padding: 4rem 2rem; }
+    .servicos-title { font-size: 2rem; }
+    .servicos-desc { font-size: 1.15rem; }
+
+    .pq-escolher-section { padding: 4rem 1.5rem; }
+    .pq-escolher-container { padding: 3rem 1.5rem; }
+    .pq-escolher-title { font-size: 2rem; }
+    .pq-escolher-content p { font-size: 1.15rem; }
+
+    .diferenciais-section { padding: 4rem 2rem; }
+    .diferenciais-title { font-size: 2rem; }
+    .diferenciais-text { font-size: 1.15rem; }
+
+    .equipe-section { padding: 4rem 2rem; }
+    .equipe-title { font-size: 2rem; }
+
     .gallery-section { padding: 2rem; }
     .gallery-grid { grid-template-columns: 1fr; }
     .img-large { grid-row: span 1; }
@@ -374,7 +696,12 @@
     <ul class="nav-links">
       <li class="active"><a href="#inicio">INÍCIO</a></li>
       <li><a href="#quem-somos">QUEM SOMOS</a></li>
-      <li><a href="#atuacao">ATUAÇÃO E SERVIÇOS</a></li>
+      <li><a href="#atuacao">ATUAÇÃO E DIRETRIZES</a></li>
+      <li><a href="#metodologia">METODOLOGIA</a></li>
+      <li><a href="#servicos">SERVIÇOS</a></li> 
+      <li><a href="#por-que-escolher">POR QUE ESCOLHER</a></li> 
+      <li><a href="#diferenciais">ACOMPANHAMENTO</a></li> 
+      <li><a href="#equipe">EQUIPE</a></li> <!-- Novo link adicionado -->
       <li><a href="#galeria">PROJETOS</a></li>
       <li><a href="#guias">GUIAS</a></li>
     </ul>
@@ -396,9 +723,11 @@
     <section id="quem-somos" class="about-section">
       <img src="duardonorio.jpeg" alt="Equipe em Campo" class="profile-circle" style="background-color: #ccc;">
       
-      <h3 class="quote-title">Acreditamos que...</h3>
+      <h3 class="quote-title">Quem somos nós?</h3>
       <p class="quote-text">
-        O avanço em direção a um futuro sustentável e produtivo está intrinsecamente ligado à tomada de decisões conscientes no presente. A faunainflora transforma a biodiversidade do solo em dados estratégicos, impactando o agronegócio com boas práticas sociais, ambientais e de governança (ESG).
+        Somos uma empresa de inteligência ambiental especializada em monitoramento biológico, geoprocessamento e diagnóstico da qualidade ambiental. Nossa atuação integra conhecimento científico, tecnologias geoespaciais e análises da fauna edáfica para transformar dados complexos em informações estratégicas para o agronegócio, projetos ambientais e processos de licenciamento.
+        <br><br>
+        Trabalhamos para promover a sustentabilidade e a conformidade ambiental, oferecendo soluções inovadoras que auxiliam na avaliação da saúde do solo, no monitoramento de impactos ambientais e na construção de estratégias voltadas para certificações ESG e recuperação de áreas degradadas. Nosso compromisso é unir ciência, tecnologia e gestão ambiental para gerar resultados confiáveis e contribuir para o uso sustentável dos recursos naturais.
       </p>
       <div class="signature">Esse é o papel da faunainflora</div>
       
@@ -432,7 +761,178 @@
       </div>
     </section>
 
-    <!-- SEÇÃO 4: GALERIA / PROJETOS -->
+    <!-- SEÇÃO 4: METODOLOGIA -->
+    <section id="metodologia" class="metodologia-section">
+      <div class="metodologia-content">
+        <h2 class="metodologia-title">Nossa metodologia</h2>
+        <div class="metodologia-text">
+          <p>Na Fauna in Flora, desenvolvemos soluções ambientais a partir de uma abordagem integrada, que articula geotecnologias, monitoramento em campo, análise de indicadores biológicos e interpretação técnica especializada. Essa metodologia nos permite compreender de forma ampla a dinâmica ambiental de cada área, produzindo diagnósticos consistentes, dados confiáveis e subsídios qualificados para a tomada de decisão.</p>
+          <p>Com o apoio do geoprocessamento, do sensoriamento remoto e da avaliação ambiental aplicada, transformamos dados complexos em informações estratégicas capazes de orientar ações de monitoramento, regularização, compensação e recuperação ambiental. Nossa atuação contempla desde o levantamento de campo e a organização de bases geoespaciais até a elaboração de mapas, relatórios técnicos e indicadores que fortalecem a gestão ambiental dos projetos.</p>
+          <p>Mais do que atender exigências legais, buscamos entregar inteligência ambiental aplicada, promovendo segurança técnica, conformidade normativa e soluções sustentáveis alinhadas às necessidades de cada cliente e às particularidades de cada território.</p>
+        </div>
+      </div>
+      <div class="metodologia-visual">
+        <div class="metodologia-card">
+          <div class="icon">🛰️</div>
+          <h4>Geotecnologias e Sensoriamento</h4>
+        </div>
+        <div class="metodologia-card">
+          <div class="icon">🌿</div>
+          <h4>Monitoramento em Campo</h4>
+        </div>
+        <div class="metodologia-card">
+          <div class="icon">🔬</div>
+          <h4>Análise de Indicadores</h4>
+        </div>
+        <div class="metodologia-card">
+          <div class="icon">📊</div>
+          <h4>Inteligência Aplicada</h4>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 5: SERVIÇOS -->
+    <section id="servicos" class="servicos-section">
+      <h2 class="servicos-title">Nossos serviços</h2>
+      <p class="servicos-desc">
+        A Fauna in Flora oferece soluções técnicas especializadas voltadas à gestão, monitoramento e regularização ambiental, atuando de forma estratégica no apoio a empreendimentos, propriedades rurais, projetos e instituições que demandam suporte ambiental qualificado. Nossos serviços integram conhecimento científico, análise técnica e ferramentas de geotecnologia para garantir resultados confiáveis, aplicáveis e alinhados às necessidades de cada cliente.
+      </p>
+
+      <div class="servicos-grid">
+        <div class="servico-card">
+          <div class="servico-icon">📄</div>
+          <h4>Elaboração de laudos e relatórios ambientais</h4>
+        </div>
+        <div class="servico-card">
+          <div class="servico-icon">🧭</div>
+          <h4>Consultoria ambiental especializada</h4>
+        </div>
+        <div class="servico-card">
+          <div class="servico-icon">🔬</div>
+          <h4>Monitoramento periódico do solo e de indicadores ambientais</h4>
+        </div>
+        <div class="servico-card">
+          <div class="servico-icon">🗺️</div>
+          <h4>Serviços de geoprocessamento e produção de mapas temáticos</h4>
+        </div>
+        <div class="servico-card">
+          <div class="servico-icon">📈</div>
+          <h4>Produção de relatórios e indicadores ESG</h4>
+        </div>
+        <div class="servico-card">
+          <div class="servico-icon">🎓</div>
+          <h4>Treinamentos técnicos e capacitação de equipes</h4>
+        </div>
+        <div class="servico-card">
+          <div class="servico-icon">🤝</div>
+          <h4>Planos de acompanhamento e suporte técnico contínuo</h4>
+        </div>
+        <div class="servico-card">
+          <div class="servico-icon">💡</div>
+          <h4>Desenvolvimento de projetos, editais e propostas financiadas</h4>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 6: POR QUE ESCOLHER -->
+    <section id="por-que-escolher" class="pq-escolher-section">
+      <div class="pq-escolher-container">
+        <h2 class="pq-escolher-title">Por que escolher a Fauna in Flora</h2>
+        <div class="pq-escolher-content">
+          <p>Na Fauna in Flora, unimos conhecimento técnico, compromisso ambiental e visão estratégica para oferecer soluções que vão além da execução de serviços. Nossa atuação é pautada pela integração entre ciência, tecnologia e responsabilidade socioambiental, garantindo aos clientes suporte qualificado em todas as etapas de seus projetos.</p>
+          <p>Trabalhamos com foco na precisão técnica, na interpretação inteligente dos dados ambientais e na construção de soluções personalizadas, sempre considerando as particularidades de cada território, atividade e demanda. Ao integrar monitoramento, geoprocessamento, relatórios técnicos e acompanhamento contínuo, entregamos não apenas conformidade legal, mas também informações que fortalecem a gestão ambiental e a tomada de decisão.</p>
+          <p>Escolher a Fauna in Flora é contar com uma empresa comprometida com a qualidade técnica, a inovação, a sustentabilidade e a valorização da biodiversidade, transformando desafios ambientais em oportunidades de planejamento, regularização e conservação.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 7: DIFERENCIAIS -->
+    <section id="diferenciais" class="diferenciais-section">
+      <h2 class="diferenciais-title">Como mantemos nossos clientes próximos</h2>
+      <p class="diferenciais-text">
+        Na Fauna in Flora, acreditamos que um serviço ambiental de qualidade vai além da entrega de relatórios. Por isso, buscamos construir um relacionamento contínuo com nossos clientes por meio de consultoria personalizada, suporte técnico, monitoramento ambiental e produção de informações atualizadas para apoiar a tomada de decisão.
+      </p>
+
+      <div class="diff-grid">
+        <div class="diff-card">
+          <div class="diff-icon">🤝</div>
+          <h4>Consultoria personalizada</h4>
+        </div>
+        <div class="diff-card">
+          <div class="diff-icon">📊</div>
+          <h4>Relatórios técnicos periódicos</h4>
+        </div>
+        <div class="diff-card">
+          <div class="diff-icon">💻</div>
+          <h4>Suporte online</h4>
+        </div>
+        <div class="diff-card">
+          <div class="diff-icon">📡</div>
+          <h4>Monitoramento contínuo</h4>
+        </div>
+        <div class="diff-card">
+          <div class="diff-icon">👨‍🏫</div>
+          <h4>Treinamentos presenciais</h4>
+        </div>
+        <div class="diff-card">
+          <div class="diff-icon">🗺️</div>
+          <h4>Produção de mapas e indicadores</h4>
+        </div>
+        <div class="diff-card">
+          <div class="diff-icon">🌱</div>
+          <h4>Educação ambiental aplicada ao campo</h4>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 8: EQUIPE (Nova Seção) -->
+    <section id="equipe" class="equipe-section">
+      <h2 class="equipe-title">Nossa Equipe</h2>
+      <p class="equipe-desc">
+        Conheça os especialistas dedicados a transformar dados ambientais em inteligência aplicada para o seu negócio.
+      </p>
+
+      <div class="equipe-grid">
+        <!-- Espaço Membro 1 -->
+        <div class="membro-card">
+          <img src="lailtonaguiar.jpeg" alt="Membro 1" class="membro-foto">
+          <h4 class="membro-nome">Lailton Aguiar</h4>
+        </div>
+        
+        <!-- Espaço Membro 2 -->
+        <div class="membro-card">
+          <img src="samuellevi.jpeg" alt="Membro 2" class="membro-foto">
+          <h4 class="membro-nome">Samuel Levi</h4>
+        </div>
+
+        <!-- Espaço Membro 3 -->
+        <div class="membro-card">
+          <img src="eduardolendo.jpeg" alt="Membro 3" class="membro-foto">
+          <h4 class="membro-nome">Eduardo</h4>
+        </div>
+
+        <!-- Espaço Membro 4 -->
+        <div class="membro-card">
+          <img src="benoia.jpeg" alt="Membro 4" class="membro-foto">
+          <h4 class="membro-nome">Bennaya</h4>
+        </div>
+
+        <!-- Espaço Membro 5 -->
+        <div class="membro-card">
+          <img src="ghiliane.jpeg" alt="Membro 5" class="membro-foto">
+          <h4 class="membro-nomghi">Giliane</h4>
+        </div>
+
+        <!-- Espaço Membro 6 -->
+        <div class="membro-card">
+          <img src="thauan.jpeg" alt="Membro 6" class="membro-foto">
+          <h4 class="membro-nome">Thauan</h4>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 9: GALERIA / PROJETOS -->
     <section id="galeria" class="gallery-section">
       <div class="gallery-grid">
         <img src="libélula.jpeg" alt="Projeto 1" class="img-large" style="background-color: #A3B19B;">
@@ -444,7 +944,7 @@
       </div>
     </section>
 
-    <!-- SEÇÃO 5: GUIAS -->
+    <!-- SEÇÃO 10: GUIAS -->
     <section id="guias" class="guides-section">
       <h2 class="guides-title">Guias e Manuais</h2>
       <p class="guides-text">
