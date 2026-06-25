@@ -5,746 +5,459 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>faunainflora — Inteligência Ambiental do Solo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --forest: #1E5C12;
-    --green: #2D7A1A;
-    --leaf: #4A9E2E;
-    --sage: #7BB85A;
-    --cream: #F4F0E6;
-    --parchment: #EAE4D4;
-    --earth: #5C3D1E;
-    --bark: #8B5A2B;
-    --white: #FAFAF7;
-    --dark: #111A0D;
-    --text: #2A3320;
-    --muted: #6B7A5E;
-    --scan: rgba(74,158,46,0.18);
+    --sidebar-bg: #C6D6C3; /* Verde claro da barra lateral */
+    --logo-bg: #0C361E; /* Verde escuro do logo */
+    --text-dark: #1E2B1E;
+    --text-muted: #5A6B5A;
+    --heading-color: #4A9E8E; /* Tom esverdeado/azulado dos títulos Visão/Missão */
+    --bg-cream: #F9F9F6;
+    --white: #FFFFFF;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
     font-family: 'Inter', sans-serif;
-    background: var(--white);
-    color: var(--text);
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 1rem 2rem;
-    display: flex; align-items: center; justify-content: space-between;
-    background: rgba(30, 26, 13, 0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(74,158,46,0.2);
-  }
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.25rem; font-style: italic;
-    color: var(--sage); letter-spacing: 0.02em;
-  }
-  .nav-logo span { color: var(--leaf); font-style: normal; }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    color: rgba(244,240,230,0.7); text-decoration: none;
-    font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
-    font-weight: 500; transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--sage); }
-  .nav-cta {
-    background: var(--leaf); color: var(--white);
-    padding: 0.5rem 1.25rem; border-radius: 2px;
-    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
-    font-weight: 600; text-decoration: none; transition: background 0.2s;
-  }
-  .nav-cta:hover { background: var(--green); }
-
-  .hamburger {
-    display: none; flex-direction: column; gap: 5px; cursor: pointer;
-    background: none; border: none; padding: 4px;
-  }
-  .hamburger span {
-    display: block; width: 24px; height: 2px;
-    background: var(--sage); transition: all 0.3s;
-  }
-
-  /* HERO */
-  .hero {
+    background: var(--bg-cream);
+    color: var(--text-dark);
+    display: flex;
     min-height: 100vh;
-    background: var(--dark);
-    display: flex; align-items: center;
-    position: relative; overflow: hidden;
-    padding: 7rem 2rem 4rem;
   }
 
-  /* geo grid animation — the signature element */
-  .geo-grid {
-    position: absolute; inset: 0; pointer-events: none;
-    background-image:
-      linear-gradient(rgba(74,158,46,0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(74,158,46,0.06) 1px, transparent 1px);
-    background-size: 60px 60px;
-    animation: gridShift 20s linear infinite;
-  }
-  @keyframes gridShift {
-    0% { background-position: 0 0; }
-    100% { background-position: 60px 60px; }
-  }
-
-  .scan-line {
-    position: absolute; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, transparent, var(--leaf), var(--sage), transparent);
-    animation: scan 6s ease-in-out infinite;
-    opacity: 0.4;
-  }
-  @keyframes scan {
-    0% { top: 0%; opacity: 0; }
-    10% { opacity: 0.4; }
-    90% { opacity: 0.4; }
-    100% { top: 100%; opacity: 0; }
+  /* SIDEBAR (Barra Lateral) */
+  .sidebar {
+    width: 280px;
+    background-color: var(--sidebar-bg);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0;
+    z-index: 100;
   }
 
-  .hero-glow {
-    position: absolute; width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(45,122,26,0.18) 0%, transparent 70%);
-    top: 50%; left: 60%; transform: translate(-50%,-50%);
-    pointer-events: none;
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    padding: 0 1.5rem; 
   }
 
-  .hero-content {
-    position: relative; z-index: 2;
-    max-width: 1200px; margin: 0 auto; width: 100%;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  .logo-box {
+    width: 100%;
+    max-width: 230px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .hero-eyebrow {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem; color: var(--leaf);
-    letter-spacing: 0.2em; text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    display: flex; align-items: center; gap: 0.75rem;
-  }
-  .hero-eyebrow::before {
-    content: ''; display: block; width: 32px; height: 1px; background: var(--leaf);
+  .logo-box img {
+    width: 100%;
+    height: auto; 
+    object-fit: contain; 
+    display: block;
   }
 
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.4rem, 5vw, 4.2rem);
-    font-weight: 900; line-height: 1.05;
-    color: var(--cream);
-    margin-bottom: 1.5rem;
-  }
-  .hero h1 em {
-    font-style: italic; color: var(--sage);
+  .nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 
-  .hero-desc {
-    color: rgba(244,240,230,0.65);
-    font-size: 1rem; line-height: 1.8;
-    max-width: 480px; margin-bottom: 2.5rem;
+  .nav-links li {
+    width: 100%;
+    text-align: right;
   }
 
-  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn-primary {
-    background: var(--leaf); color: var(--white);
-    padding: 0.9rem 2rem; border-radius: 2px;
-    font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
-    font-weight: 600; text-decoration: none;
-    transition: all 0.2s; border: 2px solid var(--leaf);
+  .nav-links a {
     display: inline-block;
+    padding: 0.6rem 2rem;
+    color: var(--logo-bg);
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: all 0.3s ease;
   }
-  .btn-primary:hover { background: var(--green); border-color: var(--green); }
-  .btn-outline {
-    background: transparent; color: var(--sage);
-    padding: 0.9rem 2rem; border-radius: 2px;
-    font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
-    font-weight: 600; text-decoration: none;
-    border: 2px solid rgba(74,158,46,0.4); transition: all 0.2s;
-    display: inline-block;
-  }
-  .btn-outline:hover { border-color: var(--sage); color: var(--cream); }
 
-  /* hero right side: data panel */
-  .hero-panel {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(74,158,46,0.2);
-    border-radius: 4px; padding: 2rem;
+  .nav-links li.active a, .nav-links a:hover {
+    background-color: var(--white);
+    color: var(--logo-bg);
   }
-  .panel-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem; color: var(--leaf);
-    letter-spacing: 0.18em; text-transform: uppercase;
-    margin-bottom: 1.5rem; padding-bottom: 0.75rem;
-    border-bottom: 1px solid rgba(74,158,46,0.15);
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .panel-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--leaf);
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.8); }
-  }
-  .metric-row {
-    display: flex; justify-content: space-between; align-items: flex-end;
-    padding: 1rem 0; border-bottom: 1px solid rgba(244,240,230,0.05);
-  }
-  .metric-row:last-child { border-bottom: none; }
-  .metric-name { font-size: 0.78rem; color: rgba(244,240,230,0.5); font-weight: 400; }
-  .metric-val {
-    font-family: 'Space Mono', monospace;
-    font-size: 1.1rem; color: var(--sage); font-weight: 700;
-  }
-  .metric-bar-wrap { margin-top: 0.35rem; height: 3px; background: rgba(74,158,46,0.1); border-radius: 2px; }
-  .metric-bar { height: 100%; background: var(--leaf); border-radius: 2px; transition: width 1.5s ease; }
 
-  /* SOBRE */
-  .section { padding: 6rem 2rem; }
-  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .social-icons {
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 0 2rem;
+  }
 
-  .about-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  .social-icon {
+    width: 28px;
+    height: 28px;
+    background-color: #6B8B6F;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background 0.2s;
   }
-  .section-eyebrow {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.68rem; color: var(--leaf);
-    letter-spacing: 0.2em; text-transform: uppercase;
-    margin-bottom: 1rem;
+  .social-icon:hover { background-color: var(--logo-bg); }
+
+  /* MAIN CONTENT */
+  .main-content {
+    margin-left: 280px;
+    width: calc(100% - 280px);
+    display: flex;
+    flex-direction: column;
   }
-  .section-title {
+
+  /* SECTION 1: HERO (Imagem Full) */
+  .hero-section {
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* SECTION 2: QUEM SOMOS */
+  .about-section {
+    padding: 6rem 2rem;
+    background: var(--bg-cream);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-circle {
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 2rem;
+    border: 4px solid var(--white);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  }
+
+  /* --- FONTES AUMENTADAS AQUI --- */
+  .quote-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 900; line-height: 1.15;
-    color: var(--forest); margin-bottom: 1.5rem;
-  }
-  .section-title em { font-style: italic; color: var(--leaf); }
-  .section-body { color: var(--muted); font-size: 1rem; line-height: 1.85; }
-  .section-body p + p { margin-top: 1rem; }
-
-  .about-visual {
-    background: var(--forest);
-    border-radius: 4px; padding: 2.5rem;
-    position: relative; overflow: hidden;
-  }
-  .about-visual::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(74,158,46,0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(74,158,46,0.08) 1px, transparent 1px);
-    background-size: 28px 28px;
-  }
-  .about-quote {
-    position: relative; z-index: 1;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem; font-style: italic;
-    color: var(--cream); line-height: 1.7;
-  }
-  .about-quote::before {
-    content: '"';
-    display: block; font-size: 5rem; line-height: 0.8;
-    color: var(--leaf); margin-bottom: 1rem; font-style: normal;
-  }
-  .about-tag {
-    margin-top: 1.5rem; padding-top: 1.5rem;
-    border-top: 1px solid rgba(74,158,46,0.2);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.68rem; color: var(--sage);
-    letter-spacing: 0.15em; text-transform: uppercase;
+    font-style: italic;
+    color: var(--heading-color);
+    font-size: 2rem; /* Aumentado de 1.5rem para 2rem */
+    margin-bottom: 1.5rem;
   }
 
-  /* DIFERENCIAIS */
-  .diff-section { background: var(--cream); }
-  .diff-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem; margin-top: 3rem;
+  .quote-text {
+    max-width: 800px; /* Aumentado um pouco para acomodar bem o texto maior */
+    font-size: 1.4rem; /* Aumentado de 1.15rem para 1.4rem */
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
   }
-  .diff-card {
-    background: var(--white); border-radius: 4px; padding: 2rem;
-    border: 1px solid rgba(30,92,18,0.08);
-    transition: all 0.25s; position: relative; overflow: hidden;
-  }
-  .diff-card::after {
-    content: ''; position: absolute; left: 0; top: 0;
-    width: 3px; height: 100%; background: var(--leaf);
-    transform: scaleY(0); transform-origin: bottom; transition: transform 0.25s;
-  }
-  .diff-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(30,92,18,0.1); }
-  .diff-card:hover::after { transform: scaleY(1); }
-  .diff-icon {
-    width: 44px; height: 44px; border-radius: 50%;
-    background: rgba(74,158,46,0.1); display: flex; align-items: center; justify-content: center;
-    margin-bottom: 1.25rem; font-size: 1.3rem;
-  }
-  .diff-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem; font-weight: 700;
-    color: var(--forest); margin-bottom: 0.6rem;
-  }
-  .diff-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
 
-  /* COMO FUNCIONA */
-  .process-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 0; margin-top: 3rem;
-    border: 1px solid rgba(30,92,18,0.1); border-radius: 4px; overflow: hidden;
+  .signature {
+    font-weight: 600;
+    font-size: 1.25rem; /* Aumentado de 1.1rem para 1.25rem */
+    color: var(--text-dark);
+    margin-bottom: 2rem;
   }
-  .process-step {
-    padding: 2.5rem 2rem; border-right: 1px solid rgba(30,92,18,0.1);
+  /* ------------------------------ */
+
+  .about-social {
+    display: flex;
+    gap: 1rem;
+  }
+  .about-social .social-icon { background-color: #B0C4B1; }
+  .about-social .social-icon:hover { background-color: var(--heading-color); }
+
+  /* SECTION 3: BANNER + 3 COLUNAS */
+  .banner-section {
+    width: 100%;
+  }
+
+  .banner-image {
+    width: 100%;
+    height: 350px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-align: center;
     position: relative;
   }
-  .process-step:last-child { border-right: none; }
-  .step-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem; color: var(--leaf);
-    letter-spacing: 0.18em; margin-bottom: 1rem;
-    display: flex; align-items: center; gap: 0.5rem;
+  
+  .banner-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
   }
-  .step-num::after {
-    content: ''; flex: 1; height: 1px; background: rgba(74,158,46,0.2);
+
+  .banner-image h2, .banner-image p {
+    position: relative;
+    z-index: 1;
   }
-  .process-step h3 {
+
+  .banner-image h2 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  .banner-image p {
     font-family: 'Playfair Display', serif;
-    font-size: 1.05rem; font-weight: 700; color: var(--forest);
-    margin-bottom: 0.6rem;
-  }
-  .process-step p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
-
-  /* CLIENTES */
-  .clients-section { background: var(--forest); color: var(--cream); }
-  .clients-section .section-title { color: var(--cream); }
-  .clients-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem; margin-top: 3rem;
-  }
-  .client-tag {
-    border: 1px solid rgba(244,240,230,0.15); border-radius: 3px;
-    padding: 1.25rem 1.5rem;
-    display: flex; align-items: center; gap: 0.75rem;
-    transition: all 0.2s;
-  }
-  .client-tag:hover { background: rgba(74,158,46,0.1); border-color: rgba(74,158,46,0.4); }
-  .client-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--leaf); flex-shrink: 0; }
-  .client-tag span { font-size: 0.85rem; color: rgba(244,240,230,0.75); }
-
-  /* RECEITAS */
-  .revenue-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem; margin-top: 3rem;
-  }
-  .revenue-card {
-    background: var(--parchment); border-radius: 4px; padding: 2rem;
-    border: 1px solid rgba(30,92,18,0.08);
-  }
-  .revenue-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem; font-weight: 700; color: var(--forest); margin-bottom: 0.5rem;
-  }
-  .revenue-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
-  .revenue-tag {
-    display: inline-block; margin-top: 1rem;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.62rem; color: var(--leaf); letter-spacing: 0.15em; text-transform: uppercase;
-    padding: 0.3rem 0.7rem; border: 1px solid rgba(74,158,46,0.3); border-radius: 2px;
+    font-style: italic;
+    font-size: 1.35rem;
   }
 
-  /* CANAIS */
-  .channels-section { background: var(--dark); }
-  .channels-section .section-title { color: var(--cream); }
-  .channels-section .section-eyebrow { color: var(--leaf); }
-  .channels-section .section-body { color: rgba(244,240,230,0.55); }
-  .channels-list {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1px; margin-top: 3rem; background: rgba(74,158,46,0.1);
-    border: 1px solid rgba(74,158,46,0.1); border-radius: 4px; overflow: hidden;
+  .three-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    padding: 5rem 4rem;
+    background: var(--white);
   }
-  .channel-item {
-    background: var(--dark); padding: 1.5rem;
-    display: flex; flex-direction: column; gap: 0.4rem;
-  }
-  .channel-icon { font-size: 1.4rem; }
-  .channel-name { font-size: 0.88rem; color: rgba(244,240,230,0.8); font-weight: 500; }
-  .channel-desc { font-size: 0.75rem; color: var(--muted); }
 
-  /* CTA */
-  .cta-section {
-    background: var(--leaf);
-    text-align: center; padding: 6rem 2rem;
+  .col h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
+    color: var(--heading-color);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
   }
-  .cta-section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900;
-    color: var(--white); margin-bottom: 1rem;
-  }
-  .cta-section p { color: rgba(255,255,255,0.8); font-size: 1rem; margin-bottom: 2.5rem; max-width: 480px; margin-inline: auto; margin-bottom: 2.5rem; }
-  .btn-white {
-    background: var(--white); color: var(--forest);
-    padding: 1rem 2.5rem; border-radius: 2px;
-    font-size: 0.88rem; letter-spacing: 0.1em; text-transform: uppercase;
-    font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.2s;
-  }
-  .btn-white:hover { background: var(--cream); }
 
-  /* FOOTER */
-  footer {
-    background: var(--dark); padding: 3rem 2rem;
-    border-top: 1px solid rgba(74,158,46,0.15);
+  .col p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    text-align: justify;
   }
-  .footer-inner {
-    max-width: 1200px; margin: 0 auto;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 1.5rem;
-  }
-  .footer-logo {
-    font-family: 'Playfair Display', serif; font-style: italic;
-    font-size: 1.1rem; color: var(--sage);
-  }
-  .footer-tagline { font-size: 0.78rem; color: var(--muted); margin-top: 0.25rem; }
-  .footer-copy { font-size: 0.75rem; color: var(--muted); }
 
-  /* MOBILE */
+  /* SECTION 4: GALERIA DE IMAGENS */
+  .gallery-section {
+    padding: 4rem;
+    background: var(--bg-cream);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .gallery-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+
+  .img-large {
+    grid-row: span 2;
+    height: 100%;
+    min-height: 400px;
+  }
+
+  .gallery-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .gallery-col img {
+    height: 250px;
+  }
+
+  .img-landscape {
+    grid-column: span 2;
+    height: 400px;
+  }
+
+  /* SECTION 5: GUIAS */
+  .guides-section {
+    padding: 0;
+    background: linear-gradient(to bottom, #FFFFFF 0%, #000000 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .guides-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* RESPONSIVIDADE (Mobile) */
   @media (max-width: 900px) {
-    .hero-content { grid-template-columns: 1fr; gap: 3rem; }
-    .hero-panel { display: none; }
-    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .process-grid { grid-template-columns: 1fr 1fr; }
-    .process-step { border-right: none; border-bottom: 1px solid rgba(30,92,18,0.1); }
-    .process-step:nth-child(odd) { border-right: 1px solid rgba(30,92,18,0.1); }
-    .process-step:last-child { border-bottom: none; }
-  }
-  @media (max-width: 640px) {
-    .nav-links, .nav-cta { display: none; }
-    .hamburger { display: flex; }
-    nav { padding: 1rem 1.25rem; }
-    .section { padding: 4rem 1.25rem; }
-    .process-grid { grid-template-columns: 1fr; }
-    .process-step { border-right: none !important; }
-    .hero { padding: 6rem 1.25rem 3rem; }
-    .hero-actions { flex-direction: column; }
-    .btn-primary, .btn-outline { text-align: center; }
-    .footer-inner { flex-direction: column; text-align: center; }
-  }
-
-  /* mobile menu overlay */
-  .mobile-menu {
-    display: none; position: fixed; inset: 0; background: rgba(17,26,13,0.98);
-    z-index: 200; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
-  }
-  .mobile-menu.open { display: flex; }
-  .mobile-menu a {
-    font-family: 'Playfair Display', serif; font-size: 1.8rem;
-    color: var(--cream); text-decoration: none; transition: color 0.2s;
-  }
-  .mobile-menu a:hover { color: var(--sage); }
-  .mobile-close {
-    position: absolute; top: 1.5rem; right: 1.5rem;
-    background: none; border: none; color: var(--muted);
-    font-size: 1.5rem; cursor: pointer;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .geo-grid, .scan-line { animation: none; }
+    body { flex-direction: column; }
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+      padding: 1rem;
+    }
+    .logo-container { margin-bottom: 1rem; }
+    .logo-box { max-width: 180px; } 
+    .nav-links li { text-align: center; }
+    .nav-links a { padding: 0.8rem; }
+    .social-icons { padding: 1rem 0; margin-top: 1rem; }
+    .main-content { margin-left: 0; width: 100%; }
+    .three-columns { grid-template-columns: 1fr; padding: 3rem 2rem; gap: 2rem; }
+    .gallery-section { padding: 2rem; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .img-large { grid-row: span 1; }
+    .img-landscape { grid-column: span 1; height: 300px; }
+    
+    /* Ajuste responsivo extra para os textos aumentados não ficarem gigantes no celular */
+    .quote-title { font-size: 1.6rem; }
+    .quote-text { font-size: 1.15rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">fauna<span>in</span>flora</div>
-  <ul class="nav-links">
-    <li><a href="#sobre">Sobre</a></li>
-    <li><a href="#diferenciais">Diferenciais</a></li>
-    <li><a href="#metodologia">Metodologia</a></li>
-    <li><a href="#clientes">Clientes</a></li>
-    <li><a href="#servicos">Serviços</a></li>
-  </ul>
-  <a href="#contato" class="nav-cta">Solicitar diagnóstico</a>
-  <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')" aria-label="Abrir menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+  <!-- BARRA LATERAL -->
+  <aside class="sidebar">
+    <div class="logo-container">
+      <div class="logo-box">
+        <img src="logo.jpeg" alt="faunainflora">
+      </div>
+    </div>
+    
+    <ul class="nav-links">
+      <li class="active"><a href="#inicio">INÍCIO</a></li>
+      <li><a href="#quem-somos">QUEM SOMOS</a></li>
+      <li><a href="#atuacao">ATUAÇÃO E SERVIÇOS</a></li>
+      <li><a href="#galeria">PROJETOS</a></li>
+      <li><a href="#guias">GUIAS</a></li>
+    </ul>
 
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('open')">✕</button>
-  <a href="#sobre" onclick="document.getElementById('mobileMenu').classList.remove('open')">Sobre</a>
-  <a href="#diferenciais" onclick="document.getElementById('mobileMenu').classList.remove('open')">Diferenciais</a>
-  <a href="#metodologia" onclick="document.getElementById('mobileMenu').classList.remove('open')">Metodologia</a>
-  <a href="#clientes" onclick="document.getElementById('mobileMenu').classList.remove('open')">Clientes</a>
-  <a href="#servicos" onclick="document.getElementById('mobileMenu').classList.remove('open')">Serviços</a>
-  <a href="#contato" onclick="document.getElementById('mobileMenu').classList.remove('open')">Contato</a>
-</div>
+    <div class="social-icons">
+      <a href="#" class="social-icon">In</a>
+      <a href="#" class="social-icon">Ig</a>
+      <a href="#" class="social-icon">Wp</a>
+    </div>
+  </aside>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="geo-grid"></div>
-  <div class="scan-line"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-content">
-    <div>
-      <div class="hero-eyebrow">Ecologia do Solo · Geoprocessamento · ESG</div>
-      <h1>O solo vivo é<br><em>inteligência</em><br>que você ainda<br>não está lendo.</h1>
-      <p class="hero-desc">
-        A faunainflora transforma a biodiversidade do solo em dados estratégicos para o agronegócio, o licenciamento ambiental e a conformidade ESG — com precisão científica e visão territorial.
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="main-content">
+    
+    <!-- SEÇÃO 1: HERO -->
+    <section id="inicio" class="hero-section" style="background-image: url('folhasverde.jpeg'); background-color: #8CA0CA;"></section>
+
+    <!-- SEÇÃO 2: QUEM SOMOS -->
+    <section id="quem-somos" class="about-section">
+      <img src="duardonorio.jpeg" alt="Equipe em Campo" class="profile-circle" style="background-color: #ccc;">
+      
+      <h3 class="quote-title">Acreditamos que...</h3>
+      <p class="quote-text">
+        O avanço em direção a um futuro sustentável e produtivo está intrinsecamente ligado à tomada de decisões conscientes no presente. A faunainflora transforma a biodiversidade do solo em dados estratégicos, impactando o agronegócio com boas práticas sociais, ambientais e de governança (ESG).
       </p>
-      <div class="hero-actions">
-        <a href="#contato" class="btn-primary">Solicitar diagnóstico</a>
-        <a href="#metodologia" class="btn-outline">Ver metodologia</a>
+      <div class="signature">Esse é o papel da faunainflora</div>
+      
+      <div class="about-social">
+        <a href="#" class="social-icon">In</a>
+        <a href="#" class="social-icon">Tw</a>
+        <a href="#" class="social-icon">Ig</a>
       </div>
-    </div>
-    <div class="hero-panel">
-      <div class="panel-label">
-        Monitoramento ativo — Cerrado / MATOPIBA
-        <div class="panel-dot"></div>
-      </div>
-      <div class="metric-row">
-        <div>
-          <div class="metric-name">Indicadores biológicos do solo</div>
-          <div class="metric-bar-wrap"><div class="metric-bar" style="width:87%"></div></div>
-        </div>
-        <div class="metric-val">87%</div>
-      </div>
-      <div class="metric-row">
-        <div>
-          <div class="metric-name">Cobertura geoespacial</div>
-          <div class="metric-bar-wrap"><div class="metric-bar" style="width:94%"></div></div>
-        </div>
-        <div class="metric-val">94%</div>
-      </div>
-      <div class="metric-row">
-        <div>
-          <div class="metric-name">Conformidade ESG</div>
-          <div class="metric-bar-wrap"><div class="metric-bar" style="width:76%"></div></div>
-        </div>
-        <div class="metric-val">76%</div>
-      </div>
-      <div class="metric-row">
-        <div>
-          <div class="metric-name">Qualidade biológica do solo</div>
-          <div class="metric-bar-wrap"><div class="metric-bar" style="width:91%"></div></div>
-        </div>
-        <div class="metric-val">91%</div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- SOBRE -->
-<section class="section" id="sobre">
-  <div class="section-inner">
-    <div class="about-grid">
-      <div>
-        <div class="section-eyebrow">Quem somos</div>
-        <h2 class="section-title">Biodiversidade do solo como <em>dado estratégico</em></h2>
-        <div class="section-body">
-          <p>A faunainflora é uma empresa especializada em ecologia do solo, geoprocessamento ambiental e soluções para o agronegócio sustentável. Atuamos na fronteira entre ciência e território, traduzindo a complexidade da fauna edáfica em informação acionável.</p>
-          <p>Nossa metodologia integra o geoprocessamento de alta precisão ao monitoramento biológico — desde o diagnóstico da fauna edáfica até a estruturação de planos de compensação ambiental e licenciamento, garantindo segurança técnica em todas as fases do projeto.</p>
-          <p>Com foco no Cerrado e na região MATOPIBA, servimos produtores, consultorias ambientais, cooperativas e empresas que precisam transformar passivos ambientais em ativos sustentáveis.</p>
+    <!-- SEÇÃO 3: DIRETRIZES -->
+    <section id="atuacao" class="banner-section">
+      <div class="banner-image" style="background-image: url('homensnorio.jpeg'); background-color: #5C4B40;">
+        <h2>FAUNAINFLORA</h2>
+        <p>Inteligência Ambiental do Solo</p>
+      </div>
+      
+      <div class="three-columns">
+        <div class="col">
+          <h3>VISÃO</h3>
+          <p>Ser reconhecida globalmente como autoridade em inteligência do solo e conservação da biodiversidade edáfica. Comprometidos em desenvolver soluções inovadoras para o agronegócio, estamos dedicados a incentivar nossos clientes a adotarem práticas regenerativas e obterem conformidade ESG de alto padrão.</p>
+        </div>
+        <div class="col">
+          <h3>MISSÃO</h3>
+          <p>Promover a excelência no monitoramento ambiental ao criar e compartilhar modelos inovadores que traduzem a complexidade da fauna do solo em informação acionável. Nosso compromisso é atingir os mais elevados padrões de qualidade e eficácia, apoiando o licenciamento e a recuperação de áreas degradadas.</p>
+        </div>
+        <div class="col">
+          <h3>VALORES</h3>
+          <p>Nosso compromisso absoluto com o respeito pela natureza e a precisão científica guia todas as nossas ações. Buscamos constantemente a transparência em nossos laudos técnicos e mapeamentos geoespaciais. Estamos comprometidos em garantir dados confiáveis que transformam passivos em ativos sustentáveis.</p>
         </div>
       </div>
-      <div class="about-visual">
-        <div class="about-quote">
-          Transformamos dados complexos em inteligência ambiental. Através de mapas de monitoramento, avaliamos a saúde real do ecossistema, unindo conformidade legal e recuperação funcional.
+    </section>
+
+    <!-- SEÇÃO 4: GALERIA / PROJETOS -->
+    <section id="galeria" class="gallery-section">
+      <div class="gallery-grid">
+        <img src="libélula.jpeg" alt="Projeto 1" class="img-large" style="background-color: #A3B19B;">
+        <div class="gallery-col">
+          <img src="florroxa.jpeg" alt="Projeto 2" style="background-color: #8C997A;">
+          <img src="folhasverde.jpeg" alt="Projeto 3" style="background-color: #D1BFAe;">
         </div>
-        <div class="about-tag">faunainflora — metodologia proprietária</div>
+        <img src="homensnorio.jpeg" alt="Projeto 4" class="img-landscape" style="background-color: #6C7A68;">
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- DIFERENCIAIS -->
-<section class="section diff-section" id="diferenciais">
-  <div class="section-inner">
-    <div class="section-eyebrow">O que nos diferencia</div>
-    <h2 class="section-title">Por que a faunainflora é <em>diferente</em></h2>
-    <div class="diff-grid">
-      <div class="diff-card">
-        <div class="diff-icon">🔬</div>
-        <h3>Monitoramento via fauna edáfica</h3>
-        <p>Utilizamos a diversidade de organismos do solo como bioindicadores precisos da saúde ambiental — mais sensíveis que análises físico-químicas convencionais.</p>
-      </div>
-      <div class="diff-card">
-        <div class="diff-icon">🗺️</div>
-        <h3>Mapas geoespaciais de qualidade biológica</h3>
-        <p>Produzimos mapas que traduzem dados ecológicos em linguagem territorial — ferramentas diretas para gestão de propriedades e licenciamento.</p>
-      </div>
-      <div class="diff-card">
-        <div class="diff-icon">🛡️</div>
-        <h3>Apoio ao licenciamento e ESG</h3>
-        <p>Diagnósticos ambientais que atendem exigências legais e aceleram certificações ESG para empresas voltadas à exportação e financiamento verde.</p>
-      </div>
-      <div class="diff-card">
-        <div class="diff-icon">⚠️</div>
-        <h3>Identificação precoce de impactos</h3>
-        <p>Detectamos alterações ambientais antes que se tornem problemas críticos — reduzindo custos de remediação e riscos regulatórios.</p>
-      </div>
-      <div class="diff-card">
-        <div class="diff-icon">🌱</div>
-        <h3>Treinamento para manejo regenerativo</h3>
-        <p>Capacitamos equipes técnicas e produtores para práticas que restauram a função biológica do solo ao longo do tempo.</p>
-      </div>
-      <div class="diff-card">
-        <div class="diff-icon">📡</div>
-        <h3>Sensoriamento orbital e sub-orbital</h3>
-        <p>Integramos imagens de satélite e dados de drone para análise multiescala, combinando visão macro e precisão no campo.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- SEÇÃO 5: GUIAS -->
+    <section id="guias" class="guides-section">
+      <img src="guias.jpeg" alt="Guias">
+    </section>
 
-<!-- METODOLOGIA -->
-<section class="section" id="metodologia">
-  <div class="section-inner">
-    <div class="section-eyebrow">Como trabalhamos</div>
-    <h2 class="section-title">Da coleta ao <em>relatório estratégico</em></h2>
-    <div class="process-grid">
-      <div class="process-step">
-        <div class="step-num">01</div>
-        <h3>Coleta de campo</h3>
-        <p>Amostragem da fauna edáfica com equipamentos especializados e GPS de precisão, seguindo protocolos científicos padronizados.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">02</div>
-        <h3>Identificação taxonômica</h3>
-        <p>Identificação dos organismos coletados em laboratório, gerando dados de biodiversidade e índices biológicos do solo.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">03</div>
-        <h3>Geoprocessamento</h3>
-        <p>Processamento com QGIS e R: cruzamento de dados biológicos com imagens orbitais e sub-orbitais para mapas ambientais.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">04</div>
-        <h3>Laudo e dashboard</h3>
-        <p>Entrega de relatório técnico completo com indicadores atualizados, mapas interativos e recomendações de manejo.</p>
-      </div>
-    </div>
-  </div>
-</section>
+  </main>
 
-<!-- CLIENTES -->
-<section class="section clients-section" id="clientes">
-  <div class="section-inner">
-    <div class="section-eyebrow">A quem servimos</div>
-    <h2 class="section-title">Quem se beneficia do solo bem monitorado</h2>
-    <div class="clients-grid">
-      <div class="client-tag"><div class="client-dot"></div><span>Produtores rurais do Cerrado e MATOPIBA</span></div>
-      <div class="client-tag"><div class="client-dot"></div><span>Fazendas de soja, milho e algodão</span></div>
-      <div class="client-tag"><div class="client-dot"></div><span>Empresas de consultoria ambiental</span></div>
-      <div class="client-tag"><div class="client-dot"></div><span>Agronegócios voltados para exportação</span></div>
-      <div class="client-tag"><div class="client-dot"></div><span>Cooperativas agrícolas</span></div>
-      <div class="client-tag"><div class="client-dot"></div><span>Empresas com demanda ESG</span></div>
-      <div class="client-tag"><div class="client-dot"></div><span>Órgãos ambientais e recuperação de áreas</span></div>
-      <div class="client-tag"><div class="client-dot"></div><span>Projetos de licenciamento ambiental</span></div>
-    </div>
-  </div>
-</section>
+  <!-- SCRIPT PARA ATUALIZAR O MENU CONFORME O SCROLL -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('section');
+      const navItems = document.querySelectorAll('.nav-links li');
 
-<!-- SERVIÇOS / RECEITAS -->
-<section class="section" id="servicos">
-  <div class="section-inner">
-    <div class="section-eyebrow">Nossos serviços</div>
-    <h2 class="section-title">Como a faunainflora <em>pode ajudar</em> você</h2>
-    <div class="revenue-grid">
-      <div class="revenue-card">
-        <h3>Laudos Ambientais</h3>
-        <p>Documentos técnicos com validade legal para licenciamento, compensação ambiental e conformidade regulatória.</p>
-        <span class="revenue-tag">Entrega única</span>
-      </div>
-      <div class="revenue-card">
-        <h3>Consultoria Especializada</h3>
-        <p>Assessoria técnica personalizada para gestão ambiental, planejamento de uso do solo e recuperação de áreas degradadas.</p>
-        <span class="revenue-tag">Por projeto</span>
-      </div>
-      <div class="revenue-card">
-        <h3>Monitoramento Periódico</h3>
-        <p>Acompanhamento contínuo da saúde biológica do solo com relatórios, mapas e indicadores atualizados regularmente.</p>
-        <span class="revenue-tag">Assinatura mensal</span>
-      </div>
-      <div class="revenue-card">
-        <h3>Geoprocessamento</h3>
-        <p>Produção de mapas ambientais, análises espaciais e dashboards para suporte à tomada de decisão territorial.</p>
-        <span class="revenue-tag">Serviço avulso</span>
-      </div>
-      <div class="revenue-card">
-        <h3>Relatórios ESG</h3>
-        <p>Documentação estruturada para certificações ESG, financiamento verde e acesso a mercados internacionais.</p>
-        <span class="revenue-tag">Por demanda</span>
-      </div>
-      <div class="revenue-card">
-        <h3>Treinamentos Técnicos</h3>
-        <p>Capacitação de equipes e produtores em ecologia do solo, manejo regenerativo e uso de ferramentas geoespaciais.</p>
-        <span class="revenue-tag">In company · Online</span>
-      </div>
-    </div>
-  </div>
-</section>
+      window.addEventListener('scroll', () => {
+        let current = '';
 
-<!-- CANAIS -->
-<section class="section channels-section">
-  <div class="section-inner">
-    <div class="section-eyebrow">Como chegamos até você</div>
-    <h2 class="section-title">Múltiplos canais, uma única missão</h2>
-    <div class="channels-list">
-      <div class="channel-item">
-        <div class="channel-icon">📸</div>
-        <div class="channel-name">Instagram profissional</div>
-        <div class="channel-desc">Conteúdo técnico e educativo</div>
-      </div>
-      <div class="channel-item">
-        <div class="channel-icon">💼</div>
-        <div class="channel-name">LinkedIn</div>
-        <div class="channel-desc">Networking e B2B</div>
-      </div>
-      <div class="channel-item">
-        <div class="channel-icon">🌐</div>
-        <div class="channel-name">Site institucional</div>
-        <div class="channel-desc">Presença digital permanente</div>
-      </div>
-      <div class="channel-item">
-        <div class="channel-icon">🎓</div>
-        <div class="channel-name">Networking acadêmico</div>
-        <div class="channel-desc">Parcerias com universidades</div>
-      </div>
-      <div class="channel-item">
-        <div class="channel-icon">🌿</div>
-        <div class="channel-name">Feiras agroambientais</div>
-        <div class="channel-desc">Presença em eventos do setor</div>
-      </div>
-      <div class="channel-item">
-        <div class="channel-icon">🤝</div>
-        <div class="channel-name">Parcerias técnicas</div>
-        <div class="channel-desc">Agrônomos e consultorias</div>
-      </div>
-    </div>
-  </div>
-</section>
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          
+          if (window.scrollY >= (sectionTop - 150)) {
+            current = section.getAttribute('id');
+          }
+        });
 
-<!-- CTA -->
-<section class="cta-section" id="contato">
-  <h2>Pronto para conhecer<br>o que seu solo revela?</h2>
-  <p>Solicite um diagnóstico ambiental e transforme dados do solo em decisões estratégicas para sua propriedade ou projeto.</p>
-  <a href="mailto:contato@faunainflora.com.br" class="btn-white">Solicitar diagnóstico gratuito</a>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div>
-      <div class="footer-logo">faunainflora</div>
-      <div class="footer-tagline">Inteligência ambiental do solo — Cerrado · MATOPIBA</div>
-    </div>
-    <div class="footer-copy">© 2025 faunainflora. Todos os direitos reservados.</div>
-  </div>
-</footer>
+        navItems.forEach(li => {
+          li.classList.remove('active');
+          const link = li.querySelector('a');
+          
+          if (link && link.getAttribute('href') === `#${current}`) {
+            li.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
 
 </body>
 </html>
